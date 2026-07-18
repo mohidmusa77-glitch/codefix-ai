@@ -2,105 +2,65 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CodeFix AI - Professional SaaS</title>
+    <title>CodeFix AI - Ultra Premium</title>
     <style>
-        :root {
-            --bg: #050a14;
-            --card-bg: #0c1524;
-            --accent-blue: #0ea5e9;
-            --text-main: #f8fafc;
-            --text-muted: #94a3b8;
-            --border: #1f2937;
-        }
+        :root { --bg: #050a14; --card: #0c1524; --accent: #0ea5e9; --glow: rgba(14, 165, 233, 0.3); }
+        body { background: var(--bg); color: #fff; font-family: 'Inter', sans-serif; display: flex; flex-direction: column; align-items: center; padding: 40px 20px; margin: 0; }
+        
+        /* Futuristic Heading */
+        .header { text-align: center; margin-bottom: 40px; }
+        .robot-icon { font-size: 60px; filter: drop-shadow(0 0 15px var(--accent)); animation: glow 2s infinite alternate; }
+        @keyframes glow { from { filter: drop-shadow(0 0 5px var(--accent)); } to { filter: drop-shadow(0 0 20px var(--accent)); } }
+        h1 { font-size: 48px; background: linear-gradient(to right, #fff, #94a3b8); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
 
-        body {
-            background-color: var(--bg);
-            color: var(--text-main);
-            font-family: 'Segoe UI', sans-serif;
-            margin: 0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 40px 20px;
-        }
-
-        .header { text-align: center; margin-bottom: 30px; }
-        .badge-top { background: #1e293b; color: var(--accent-blue); padding: 5px 15px; border-radius: 20px; font-size: 12px; font-weight: bold; margin-bottom: 10px; display: inline-block; }
-        h1 { font-size: 40px; margin: 0; }
-
-        /* Workspace */
-        .workspace { width: 100%; max-width: 600px; background: var(--card-bg); border: 1px solid var(--border); border-radius: 16px; padding: 20px; margin-bottom: 40px; }
-        textarea { width: 100%; height: 200px; background: #050a14; color: #fff; border: 1px solid var(--border); border-radius: 8px; padding: 15px; font-family: monospace; }
-        .fix-btn { width: 100%; background: var(--accent-blue); color: white; border: none; padding: 15px; border-radius: 8px; font-weight: bold; margin-top: 15px; cursor: pointer; }
-
-        /* Pricing Section */
-        .pricing { width: 100%; max-width: 600px; }
-        .pricing-header { text-align: center; margin-bottom: 30px; }
-        .card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 16px; padding: 30px; margin-bottom: 20px; position: relative; }
-        .most-popular { position: absolute; top: -12px; left: 50%; transform: translateX(-50%); background: linear-gradient(to right, #0ea5e9, #6366f1); padding: 4px 15px; border-radius: 20px; font-size: 12px; font-weight: bold; }
-        .price { font-size: 32px; font-weight: bold; margin: 10px 0; }
-        .feature-list { list-style: none; padding: 0; }
-        .feature-list li { display: flex; align-items: center; gap: 10px; color: var(--text-muted); margin-bottom: 10px; }
-        .btn-access { width: 100%; background: #1e293b; color: white; border: 1px solid var(--border); padding: 15px; border-radius: 8px; cursor: pointer; font-weight: bold; }
-        .btn-access:hover { background: #334155; }
+        /* Premium Cards */
+        .card { background: linear-gradient(145deg, #0c1524, #050a14); border: 1px solid #1f2937; padding: 30px; border-radius: 20px; margin-bottom: 25px; position: relative; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+        .premium-card { border: 1px solid var(--accent); box-shadow: 0 0 20px rgba(14, 165, 233, 0.1); }
+        .crown { font-size: 30px; color: gold; margin-bottom: 10px; }
+        .price { font-size: 40px; font-weight: 800; margin: 10px 0; }
+        
+        /* Futuristic Buttons */
+        .btn-pro { width: 100%; background: linear-gradient(90deg, #0ea5e9, #6366f1); color: white; border: none; padding: 18px; border-radius: 12px; font-weight: 700; cursor: pointer; transition: 0.4s; text-transform: uppercase; letter-spacing: 1px; }
+        .btn-pro:hover { box-shadow: 0 0 25px var(--accent); transform: scale(1.02); }
+        
+        .badge-popular { background: var(--accent); padding: 4px 15px; border-radius: 20px; font-size: 10px; font-weight: 800; position: absolute; top: 15px; right: 20px; }
+        .check { color: var(--accent); margin-right: 10px; }
     </style>
 </head>
 <body>
 
     <div class="header">
-        <span class="badge-top">✨ The No-BS Code Doctor</span>
-        <h1>CodeFix AI 🤖</h1>
-        <p style="color:var(--text-muted)">Paste broken code. Get working code. No API.</p>
+        <div class="robot-icon">🤖</div>
+        <h1>CodeFix AI</h1>
     </div>
 
-    <div class="workspace">
-        <textarea placeholder="Drop your broken code here..."></textarea>
-        <button class="fix-btn">⚡ Fix My Code</button>
-    </div>
-
-    <div class="pricing">
-        <div class="pricing-header">
-            <h2>Simple, honest pricing</h2>
-            <p style="color:var(--text-muted)">Start free. Upgrade when you need more power.</p>
-        </div>
-
-        <!-- Free Tier -->
-        <div class="card">
-            <h3>FREE TIER</h3>
-            <div class="price">$0</div>
-            <ul class="feature-list">
-                <li>✅ 2 free fixes total</li>
-                <li>✅ JavaScript, TypeScript, Python & more</li>
-                <li>✅ Prettier auto-formatting</li>
-            </ul>
-            <button class="btn-access">2 fixes remaining</button>
-        </div>
-
+    <div class="pricing-container" style="width: 100%; max-width: 500px;">
+        
         <!-- 2-Week Pass -->
         <div class="card">
             <h3>2-WEEK PASS</h3>
             <div class="price">$5 <span>/ 2 weeks</span></div>
-            <p style="color:var(--text-muted)">Perfect for short-term projects.</p>
-            <ul class="feature-list">
-                <li>✅ Unlimited fixes for 2 weeks</li>
-                <li>✅ Priority processing</li>
-            </ul>
-            <button class="btn-access">Get 2-Week Access</button>
+            <p style="color:#94a3b8">Perfect for quick debug sessions.</p>
+            <div style="margin: 20px 0;">
+                <p><span class="check">✔</span> Unlimited fixes for 2 weeks</p>
+                <p><span class="check">✔</span> Priority processing</p>
+            </div>
+            <button class="btn-pro" style="background:#1e293b">Get 2-Week Access</button>
         </div>
 
-        <!-- Monthly Premium -->
-        <div class="card" style="border-color: var(--accent-blue);">
-            <div class="most-popular">MOST POPULAR</div>
+        <!-- Monthly Premium (Ultra Futuristic) -->
+        <div class="card premium-card">
+            <span class="badge-popular">MOST POPULAR</span>
+            <div class="crown">👑</div>
             <h3>MONTHLY PREMIUM</h3>
             <div class="price">$10 <span>/ month</span></div>
-            <p style="color:var(--text-muted)">For large files and complex debugging.</p>
-            <ul class="feature-list">
-                <li>✅ Unlimited fixes forever</li>
-                <li>✅ Large file support</li>
-                <li>✅ Early access to new features</li>
-            </ul>
-            <button class="btn-access" style="background: var(--accent-blue);">Go Premium</button>
+            <p style="color:#94a3b8">For large files & complex projects.</p>
+            <div style="margin: 20px 0;">
+                <p><span class="check">✔</span> Unlimited fixes forever</p>
+                <p><span class="check">✔</span> Large file support</p>
+                <p><span class="check">✔</span> Early access to new features</p>
+            </div>
+            <button class="btn-pro">Go Premium</button>
         </div>
     </div>
 
