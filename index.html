@@ -2,67 +2,100 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>CodeFix AI - Ultra Premium</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CodeFix AI - Premium</title>
     <style>
-        :root { --bg: #050a14; --card: #0c1524; --accent: #0ea5e9; --glow: rgba(14, 165, 233, 0.3); }
-        body { background: var(--bg); color: #fff; font-family: 'Inter', sans-serif; display: flex; flex-direction: column; align-items: center; padding: 40px 20px; margin: 0; }
+        :root { --bg: #050a14; --card: #0c1524; --accent: #0ea5e9; --text: #ffffff; --muted: #94a3b8; }
+        * { box-sizing: border-box; font-family: 'Inter', -apple-system, sans-serif; }
+        body { background: var(--bg); color: var(--text); display: flex; flex-direction: column; align-items: center; padding: 20px; margin: 0; min-height: 100vh; }
         
-        /* Futuristic Heading */
-        .header { text-align: center; margin-bottom: 40px; }
-        .robot-icon { font-size: 60px; filter: drop-shadow(0 0 15px var(--accent)); animation: glow 2s infinite alternate; }
-        @keyframes glow { from { filter: drop-shadow(0 0 5px var(--accent)); } to { filter: drop-shadow(0 0 20px var(--accent)); } }
-        h1 { font-size: 48px; background: linear-gradient(to right, #fff, #94a3b8); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .header { text-align: center; margin-bottom: 30px; }
+        .robot { font-size: 50px; margin-bottom: 10px; }
+        
+        .workspace { width: 100%; max-width: 500px; background: var(--card); border: 1px solid #1f2937; border-radius: 16px; padding: 20px; margin-bottom: 40px; }
+        textarea { width: 100%; height: 180px; background: #050a14; color: #fff; border: 1px solid #1f2937; border-radius: 8px; padding: 15px; resize: none; font-family: monospace; }
+        .fix-btn { width: 100%; background: var(--accent); color: white; border: none; padding: 16px; border-radius: 8px; font-weight: bold; cursor: pointer; margin-top: 15px; }
+        #outputBox { margin-top: 20px; padding: 15px; background: #050a14; border: 1px dashed #1f2937; border-radius: 8px; color: var(--muted); min-height: 60px; font-size: 14px; white-space: pre-wrap; }
 
-        /* Premium Cards */
-        .card { background: linear-gradient(145deg, #0c1524, #050a14); border: 1px solid #1f2937; padding: 30px; border-radius: 20px; margin-bottom: 25px; position: relative; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
-        .premium-card { border: 1px solid var(--accent); box-shadow: 0 0 20px rgba(14, 165, 233, 0.1); }
-        .crown { font-size: 30px; color: gold; margin-bottom: 10px; }
-        .price { font-size: 40px; font-weight: 800; margin: 10px 0; }
-        
-        /* Futuristic Buttons */
-        .btn-pro { width: 100%; background: linear-gradient(90deg, #0ea5e9, #6366f1); color: white; border: none; padding: 18px; border-radius: 12px; font-weight: 700; cursor: pointer; transition: 0.4s; text-transform: uppercase; letter-spacing: 1px; }
-        .btn-pro:hover { box-shadow: 0 0 25px var(--accent); transform: scale(1.02); }
-        
-        .badge-popular { background: var(--accent); padding: 4px 15px; border-radius: 20px; font-size: 10px; font-weight: 800; position: absolute; top: 15px; right: 20px; }
-        .check { color: var(--accent); margin-right: 10px; }
+        .pricing-section { width: 100%; max-width: 500px; }
+        .card { background: var(--card); border: 1px solid #1f2937; border-radius: 16px; padding: 25px; margin-bottom: 20px; position: relative; }
+        .badge { background: var(--accent); color: white; padding: 4px 12px; border-radius: 20px; font-size: 10px; position: absolute; top: -10px; right: 20px; font-weight: bold; text-transform: uppercase; }
+        .price { font-size: 28px; font-weight: bold; margin: 10px 0; }
+        .feature { display: flex; align-items: center; gap: 10px; color: var(--muted); margin-bottom: 8px; font-size: 14px; }
+        .pay-btn { width: 100%; background: #1e293b; color: white; border: 1px solid #334155; padding: 14px; border-radius: 8px; margin-top: 20px; cursor: pointer; font-weight: 600; }
+        .premium-btn { background: linear-gradient(90deg, #0ea5e9, #6366f1); border: none; }
     </style>
 </head>
 <body>
 
     <div class="header">
-        <div class="robot-icon">🤖</div>
+        <div class="robot">🤖</div>
         <h1>CodeFix AI</h1>
+        <p style="color:var(--muted)">Paste broken code. Get working code.</p>
     </div>
 
-    <div class="pricing-container" style="width: 100%; max-width: 500px;">
-        
-        <!-- 2-Week Pass -->
+    <div class="workspace">
+        <textarea id="codeInput" placeholder="Drop your broken code here..."></textarea>
+        <button class="fix-btn" id="fixBtn" onclick="fixCode()">⚡ Fix My Code</button>
+        <div id="outputBox">Fixed code will appear here...</div>
+    </div>
+
+    <div class="pricing-section">
+        <h2 style="text-align:center; margin-bottom:20px;">Simple, honest pricing</h2>
+
+        <!-- Free Tier -->
         <div class="card">
-            <h3>2-WEEK PASS</h3>
-            <div class="price">$5 <span>/ 2 weeks</span></div>
-            <p style="color:#94a3b8">Perfect for quick debug sessions.</p>
-            <div style="margin: 20px 0;">
-                <p><span class="check">✔</span> Unlimited fixes for 2 weeks</p>
-                <p><span class="check">✔</span> Priority processing</p>
-            </div>
-            <button class="btn-pro" style="background:#1e293b">Get 2-Week Access</button>
+            <h3>FREE TIER</h3>
+            <div class="price" id="statusText">$0</div>
+            <div class="feature">✅ <span id="triesCount">2</span> free fixes remaining</div>
+            <div class="feature">✅ JavaScript, Python & more</div>
+            <button class="pay-btn" id="subBtn">2 fixes remaining</button>
         </div>
 
-        <!-- Monthly Premium (Ultra Futuristic) -->
-        <div class="card premium-card">
-            <span class="badge-popular">MOST POPULAR</span>
-            <div class="crown">👑</div>
+        <!-- Monthly Premium -->
+        <div class="card" style="border-color:var(--accent);">
+            <span class="badge">Most Popular</span>
+            <div style="font-size:24px">👑</div>
             <h3>MONTHLY PREMIUM</h3>
             <div class="price">$10 <span>/ month</span></div>
-            <p style="color:#94a3b8">For large files & complex projects.</p>
-            <div style="margin: 20px 0;">
-                <p><span class="check">✔</span> Unlimited fixes forever</p>
-                <p><span class="check">✔</span> Large file support</p>
-                <p><span class="check">✔</span> Early access to new features</p>
-            </div>
-            <button class="btn-pro">Go Premium</button>
+            <div class="feature">✅ Unlimited fixes forever</div>
+            <button class="pay-btn premium-btn">Go Premium</button>
         </div>
     </div>
 
+    <script>
+        let freeTries = 2;
+
+        async function fixCode() {
+            if (freeTries <= 0) { 
+                alert("Free trials finished! Please subscribe."); 
+                return; 
+            }
+            
+            const input = document.getElementById('codeInput').value;
+            const outputBox = document.getElementById('outputBox');
+            const triesCount = document.getElementById('triesCount');
+            const subBtn = document.getElementById('subBtn');
+
+            if (!input) { alert("Please paste some code!"); return; }
+
+            outputBox.innerText = "Processing...";
+
+            try {
+                const response = await fetch('/.netlify/functions/fixCode', {
+                    method: "POST",
+                    body: JSON.stringify({ code: input })
+                });
+                const data = await response.json();
+                outputBox.innerText = data.result;
+                
+                freeTries--;
+                triesCount.innerText = freeTries;
+                subBtn.innerText = freeTries + " fixes remaining";
+            } catch (e) {
+                outputBox.innerText = "Error: Check Netlify function setup.";
+            }
+        }
+    </script>
 </body>
 </html>
