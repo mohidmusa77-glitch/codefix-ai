@@ -3,89 +3,76 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CodeFix AI - Ultra Premium</title>
+    <title>CodeFix AI - Professional AI Tool</title>
     <style>
-        :root { --bg: #050a14; --accent: #0ea5e9; }
+        :root { --bg: #050a14; --accent: #0ea5e9; --text: #ffffff; }
         * { box-sizing: border-box; font-family: 'Inter', sans-serif; }
+        
         body { 
             background: radial-gradient(circle at top right, #1e293b, #050a14); 
-            color: #fff; min-height: 100vh; margin: 0; 
-            display: flex; flex-direction: column; align-items: center; padding: 40px 20px; 
+            color: var(--text); margin: 0; padding: 40px 20px;
+            display: flex; flex-direction: column; align-items: center; min-height: 100vh;
         }
-        
-        .glass-card { 
+
+        h1 { font-size: 42px; background: linear-gradient(to right, #fff, #94a3b8); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+
+        .glass-container { 
             background: rgba(12, 21, 36, 0.7); 
-            backdrop-filter: blur(15px); 
-            border: 1px solid rgba(255,255,255,0.1); 
-            border-radius: 20px; padding: 25px; width: 100%; max-width: 500px;
-            box-shadow: 0 8px 32px rgba(0,0,0,0.8); margin-bottom: 25px;
+            backdrop-filter: blur(20px); 
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 24px; padding: 30px; width: 100%; max-width: 550px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.8); margin-bottom: 30px;
         }
 
-        h1 { 
-            background: linear-gradient(to right, #fff, #94a3b8);
-            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-            text-align: center; font-size: 40px; margin-bottom: 30px;
+        /* File Upload & Workspace */
+        .drop-zone { 
+            border: 2px dashed #1f2937; border-radius: 12px; padding: 40px; 
+            text-align: center; color: #94a3b8; cursor: pointer; transition: 0.3s;
         }
-
-        textarea { 
-            width: 100%; height: 180px; background: #050a14; color: #fff; 
-            border: 1px solid #1f2937; border-radius: 12px; padding: 15px; resize: none;
-        }
-
+        .drop-zone:hover { border-color: var(--accent); }
+        
         .fix-btn { 
             width: 100%; background: linear-gradient(135deg, #0ea5e9, #6366f1); 
-            border: none; padding: 16px; border-radius: 12px; font-weight: bold; 
-            color: white; cursor: pointer; transition: 0.3s;
+            border: none; padding: 18px; border-radius: 12px; color: white; 
+            font-weight: 800; cursor: pointer; margin-top: 20px; transition: 0.3s;
         }
-        .fix-btn:hover { box-shadow: 0 0 20px rgba(14, 165, 233, 0.6); }
+        .fix-btn:hover { box-shadow: 0 0 25px rgba(14, 165, 233, 0.5); }
 
-        .price { font-size: 32px; font-weight: 800; margin: 10px 0; }
-        .badge { background: var(--accent); padding: 4px 12px; border-radius: 20px; font-size: 10px; position: absolute; top: -10px; right: 20px; font-weight: 800; }
-        .btn-pay { width: 100%; background: #1e293b; color: white; border: 1px solid #334155; padding: 14px; border-radius: 12px; cursor: pointer; }
+        /* Pricing Cards */
+        .card { background: rgba(12, 21, 36, 0.7); border: 1px solid #1f2937; padding: 25px; border-radius: 20px; width: 100%; max-width: 550px; margin-bottom: 20px; position: relative; }
+        .price { font-size: 36px; font-weight: 900; margin: 10px 0; }
+        .btn-sub { width: 100%; background: #1e293b; color: white; padding: 15px; border-radius: 12px; border: 1px solid #334155; cursor: pointer; }
     </style>
 </head>
 <body>
 
     <h1>CodeFix AI 🤖</h1>
 
-    <div class="glass-card">
-        <textarea id="codeInput" placeholder="Paste your broken code here..."></textarea>
-        <button class="fix-btn" id="fixBtn" onclick="fixCode()">⚡ Fix My Code</button>
-        <div id="outputBox" style="margin-top:20px; color:#94a3b8; font-size:14px;">Fixed code will appear here...</div>
+    <!-- File Workspace -->
+    <div class="glass-container">
+        <div class="drop-zone" onclick="document.getElementById('fileInput').click()">
+            <p>📁 Drag & Drop files or click to upload</p>
+            <input type="file" id="fileInput" hidden>
+        </div>
+        <button class="fix-btn">⚡ Auto-Fix My Files</button>
+        <div id="status" style="margin-top:20px; color:#0ea5e9;">Ready to process...</div>
     </div>
 
-    <div class="glass-card">
+    <!-- Pricing Section -->
+    <div class="card">
         <h3>FREE TIER</h3>
         <div class="price">$0</div>
-        <p style="color:#94a3b8">2 free fixes total.</p>
-        <button class="btn-pay" id="subBtn">2 fixes remaining</button>
+        <p style="color:#94a3b8">2 free file optimizations total.</p>
+        <button class="btn-sub">2 fixes remaining</button>
     </div>
 
-    <div class="glass-card" style="border-color: var(--accent);">
-        <span class="badge">Most Popular</span>
+    <div class="card" style="border-color: var(--accent);">
+        <div style="background: var(--accent); padding: 5px 15px; border-radius: 20px; font-size: 10px; position: absolute; top: -10px; right: 20px;">MOST POPULAR</div>
         <div style="font-size:24px">👑</div>
         <h3>MONTHLY PREMIUM</h3>
         <div class="price">$10 <span>/ month</span></div>
-        <button class="btn-pay" style="background: var(--accent);">Go Premium</button>
+        <button class="btn-sub" style="background: var(--accent);">Go Premium</button>
     </div>
 
-    <script>
-        let freeTries = 2;
-        async function fixCode() {
-            if (freeTries <= 0) { alert("Free trials finished!"); return; }
-            const input = document.getElementById('codeInput').value;
-            const outputBox = document.getElementById('outputBox');
-            outputBox.innerText = "Processing...";
-            try {
-                const response = await fetch('/.netlify/functions/fixCode', {
-                    method: "POST", body: JSON.stringify({ code: input })
-                });
-                const data = await response.json();
-                outputBox.innerText = data.result;
-                freeTries--;
-                document.getElementById('subBtn').innerText = freeTries + " fixes remaining";
-            } catch (e) { outputBox.innerText = "Error connecting to AI."; }
-        }
-    </script>
 </body>
 </html>
