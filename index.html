@@ -2,68 +2,55 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>CodeFix AI - Premium</title>
-    <!-- (Aapka CSS yahan waisa hi rahega jaisa pehle tha, niche pura copy karein) -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CodeFix AI</title>
     <style>
-        /* [Aapka pura purana CSS yahan rahega] */
-        * { box-sizing: border-box; font-family: 'Inter', sans-serif; }
-        body { background-color: #0b111e; color: #f1f5f9; display: flex; flex-direction: column; align-items: center; min-height: 100vh; margin: 0; padding: 40px 20px; }
-        .workspace { width: 100%; max-width: 550px; background: #111827; border: 1px solid #1f2937; border-radius: 12px; padding: 20px; }
-        textarea { width: 100%; height: 200px; background: #0b111e; color: #cbd5e1; border: 1px solid #1f2937; border-radius: 8px; padding: 15px; resize: none; outline: none; }
-        .btn-fix { width: 100%; background: #0ea5e9; color: white; border: none; padding: 12px; border-radius: 8px; cursor: pointer; font-weight: 600; margin-top: 10px; }
-        #outputBox { margin-top: 15px; padding: 15px; background: #0b111e; border: 1px dashed #1f2937; border-radius: 8px; color: #94a3b8; min-height: 50px; white-space: pre-wrap; }
-        /* [Baaki cards aur pricing wala CSS aapka purana hi rahega] */
+        body { background-color: #050a14; color: #fff; font-family: sans-serif; display: flex; flex-direction: column; align-items: center; padding: 20px; margin: 0; }
+        .workspace { width: 100%; max-width: 500px; background: #0c1524; border: 1px solid #1f2937; border-radius: 12px; padding: 20px; }
+        textarea { width: 100%; height: 150px; background: #050a14; color: #fff; border: 1px solid #1f2937; border-radius: 8px; padding: 10px; }
+        .btn-fix { width: 100%; background: #0ea5e9; border: none; color: white; padding: 12px; border-radius: 8px; margin-top: 10px; cursor: pointer; }
+        #outputBox { margin-top: 15px; padding: 10px; border: 1px dashed #374151; border-radius: 8px; color: #94a3b8; }
+        .card { background: #0c1524; border: 1px solid #1f2937; padding: 20px; border-radius: 12px; margin-top: 20px; width: 100%; max-width: 500px; }
     </style>
 </head>
 <body>
 
     <h1>CodeFix AI 🤖</h1>
-    
     <div class="workspace">
-        <textarea id="codeInput" placeholder="Paste your broken code here..."></textarea>
+        <textarea id="codeInput" placeholder="Paste your broken code..."></textarea>
         <button class="btn-fix" id="fixBtn" onclick="fixCode()">⚡ Fix My Code</button>
         <div id="outputBox">Fixed code will display here...</div>
     </div>
 
-    <!-- [Yahan aapka purana Subscription Cards wala HTML aayega] -->
+    <!-- Subscription Cards -->
+    <div class="card">
+        <h3>2-Week Pass - $5</h3>
+        <p>Unlimited fixes for 14 days.</p>
+        <button class="btn-fix">Get 2-Week Access</button>
+    </div>
 
     <script>
-        // AI Ka System (Security Wala)
-        let freeTries = 2; // User ke 2 free tries
+        let freeTries = 2; // Free Trials
 
         async function fixCode() {
+            if (freeTries <= 0) { alert("Please subscribe to continue."); return; }
+            
             const input = document.getElementById('codeInput').value;
             const outputBox = document.getElementById('outputBox');
-            const fixBtn = document.getElementById('fixBtn');
-
-            // 1. Subscription Logic
-            if (freeTries <= 0) {
-                alert("Free trials finished! Please subscribe to continue.");
-                return;
-            }
-
-            fixBtn.innerText = "Fixing with Gemini AI...";
-            fixBtn.disabled = true;
+            
             outputBox.innerText = "Thinking...";
 
             try {
-                // Netlify function ko call kar raha hai (Key Safe hai)
+                // Key-Safe Proxy Call
                 const response = await fetch('/.netlify/functions/fixCode', {
                     method: "POST",
-                    headers: { "Content-Type": "application/json" },
                     body: JSON.stringify({ code: input })
                 });
-
                 const data = await response.json();
                 outputBox.innerText = data.result;
-                
-                // Try kam kar do
                 freeTries--;
-            } catch (error) {
-                outputBox.innerText = "Error: Could not connect to AI.";
-            } finally {
-                fixBtn.innerText = "⚡ Fix My Code";
-                fixBtn.disabled = false;
+            } catch (e) {
+                outputBox.innerText = "Error connecting to AI.";
             }
         }
     </script>
